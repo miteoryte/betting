@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Match Betting</title>
+
+<style>
+body {
+  background: #0f172a;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin:0;
+}
+
+.card {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 12px;
+  width: 420px;
+}
+
+.score {
+  font-size: 40px;
+  text-align: center;
+  margin: 10px 0 20px;
+}
+
+.teams {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.bet-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.bet1 {background: #22c55e;}
+.bet2 {background: #3b82f6;}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 6px;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+
+  <h2>Live Match</h2>
+
+  <div class="teams">
+    <span id="team1">Team A</span>
+    <span id="team2">Team B</span>
+  </div>
+
+  <div class="score">
+    <span id="score1">0</span> :
+    <span id="score2">0</span>
+  </div>
+
+  <input id="amount" placeholder="Сумма ставки">
+
+  <button id="bet1" class="bet-btn bet1">
+    Победа <span id="t1"></span> (<span id="odds1"></span>)
+  </button>
+
+  <button id="bet2" class="bet-btn bet2">
+    Победа <span id="t2"></span> (<span id="odds2"></span>)
+  </button>
+
+</div>
+
+<script>
+async function loadMatch() {
+  try {
+    const r = await fetch("/api/match");
+    const m = await r.json();
+
+    document.getElementById("team1").textContent = m.team1;
+    document.getElementById("team2").textContent = m.team2;
+
+    document.getElementById("t1").textContent = m.team1;
+    document.getElementById("t2").textContent = m.team2;
+
+    document.getElementById("score1").textContent = m.score1;
+    document.getElementById("score2").textContent = m.score2;
+
+    document.getElementById("odds1").textContent = m.odds1;
+    document.getElementById("odds2").textContent = m.odds2;
+  } catch (e) {
+    console.error("Ошибка загрузки матча", e);
+  }
+}
+
+async function placeBet(team) {
+  const amount = document.getElementById("amount").value;
+  if (!amount || isNaN(amount) || amount <= 0) {
+    alert("Введите корректную сумму ставки");
+    return;
+  }
+
+  try {
+    await fetch("/api/bet", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({team, amount})
+    });
+    alert("Ставка принята!");
+  } catch(e) {
+    alert("Ошибка при отправке ставки");
+  }
+}
+
+document.getElementById("bet1").onclick = () => placeBet(1);
+document.getElementById("bet2").onclick = () => placeBet(2);
+
+loadMatch();
+setInterval(loadMatch, 2000);
+</script>
+
+</body>
+</html>
