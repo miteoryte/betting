@@ -45,7 +45,7 @@ border-radius:8px;
 font-size:14px;
 }
 
-/* SPORTS BAR */
+/* SPORTS */
 
 .sports{
 display:flex;
@@ -68,8 +68,6 @@ display:flex;
 height:calc(100vh - 110px);
 }
 
-/* MAIN */
-
 .main{
 flex:1;
 padding:25px;
@@ -85,10 +83,41 @@ padding:20px;
 margin-bottom:20px;
 }
 
+.match-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
 .match-title{
 font-size:18px;
-margin-bottom:15px;
 opacity:.8;
+}
+
+.live{
+background:#ff3b3b;
+color:white;
+font-size:11px;
+padding:4px 8px;
+border-radius:6px;
+font-weight:600;
+animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:.5}
+100%{opacity:1}
+}
+
+.scoreboard{
+display:flex;
+justify-content:center;
+gap:30px;
+font-size:22px;
+font-weight:600;
+margin-bottom:15px;
 }
 
 .team-row{
@@ -137,7 +166,7 @@ font-size:14px;
 cursor:pointer;
 }
 
-/* EXPERT TIPS */
+/* TIPS */
 
 .tips{
 display:grid;
@@ -204,11 +233,6 @@ display:flex;
 flex-direction:column;
 }
 
-.betslip-title{
-font-size:16px;
-margin-bottom:15px;
-}
-
 .bet{
 background:#1b2438;
 padding:12px;
@@ -250,11 +274,9 @@ opacity:.8;
 
 <header>
 
-<div class="logo">RAZED</div>
+<div class="logo">Miteoryte</div>
 
-<div class="wallet">
-$0.00 Кошелек
-</div>
+<div class="wallet">$0.00 Кошелек</div>
 
 </header>
 
@@ -262,7 +284,7 @@ $0.00 Кошелек
 
 <span>⚽</span>
 <span>🏀</span>
-<span>🎮 CS2</span>
+<span>🎮</span>
 <span>🎾</span>
 <span>🏈</span>
 <span>🏐</span>
@@ -275,13 +297,33 @@ $0.00 Кошелек
 
 <div class="match-card">
 
+<div class="match-header">
+
 <div class="match-title">
 Counter-Strike 2 • BLAST Open Spring 2026
 </div>
 
+<div class="live" id="liveIndicator">
+LIVE
+</div>
+
+</div>
+
+<div class="scoreboard">
+
+<div id="team1Score">0</div>
+
+<div>:</div>
+
+<div id="team2Score">0</div>
+
+</div>
+
 <div class="team-row">
 
-<div class="team">Team Falcons</div>
+<div class="team" id="team1Name">
+Team Falcons
+</div>
 
 <div class="odds" onclick="addBet('Team Falcons',1.22)">
 1.22
@@ -291,7 +333,9 @@ Counter-Strike 2 • BLAST Open Spring 2026
 
 <div class="team-row">
 
-<div class="team">NRG Esports</div>
+<div class="team" id="team2Name">
+NRG Esports
+</div>
 
 <div class="odds" onclick="addBet('NRG Esports',3.85)">
 3.85
@@ -303,94 +347,15 @@ Counter-Strike 2 • BLAST Open Spring 2026
 
 <div class="tips">
 
-<div class="tip">
-В последних BO3 Falcons выиграли 2-1 против NRG
-</div>
-
-<div class="tip">
-Falcons вели 11-1 на первой карте
-</div>
-
-<div class="tip">
-Последний матч закончился 13-5
-</div>
-
-</div>
-
-<div class="tabs">
-
-<div class="tab">Основные</div>
-<div class="tab">Карта 1</div>
-<div class="tab">Карта 2</div>
-<div class="tab">Игроки</div>
-
-</div>
-
-<div class="market">
-
-<div class="market-row">
-
-<div>Победитель</div>
-
-<div class="market-buttons">
-
-<button onclick="addBet('Falcons',1.22)">
-1.22
-</button>
-
-<button onclick="addBet('NRG',3.85)">
-3.85
-</button>
-
-</div>
-
-</div>
-
-<div class="market-row">
-
-<div>Тотал раундов</div>
-
-<div class="market-buttons">
-
-<button onclick="addBet('Over',1.83)">
-Больше 20.5
-</button>
-
-<button onclick="addBet('Under',1.90)">
-Меньше 20.5
-</button>
-
-</div>
-
-</div>
-
-<div class="market-row">
-
-<div>Фора</div>
-
-<div class="market-buttons">
-
-<button onclick="addBet('Falcons -4.5',1.81)">
--4.5
-</button>
-
-<button onclick="addBet('NRG +4.5',1.95)">
-+4.5
-</button>
-
-</div>
-
-</div>
+<div class="tip">Falcons выиграли прошлый BO3 2-1</div>
+<div class="tip">Falcons вели 11-1 на карте</div>
+<div class="tip">Последний матч 13-5</div>
 
 </div>
 
 </div>
 
 <div class="betslip">
-
-<div class="betslip-title">
-Купон
-</div>
 
 <div id="bets"></div>
 
@@ -400,9 +365,7 @@ Falcons вели 11-1 на первой карте
 Возможный выигрыш: $0
 </div>
 
-<button class="place">
-Поставить
-</button>
+<button class="place">Поставить</button>
 
 </div>
 
@@ -421,7 +384,6 @@ document.getElementById("bets").innerHTML =
 ${name}<br>
 коэффициент ${value}
 </div>`
-
 }
 
 document.getElementById("stake").addEventListener("input",function(){
@@ -433,6 +395,33 @@ document.getElementById("win").innerText =
 "Возможный выигрыш: $" + win.toFixed(2)
 
 })
+
+/* ------------------------
+LIVE SCORE UPDATE
+------------------------ */
+
+function updateScore(data){
+
+document.getElementById("team1Name").innerText = data.team1
+document.getElementById("team2Name").innerText = data.team2
+
+document.getElementById("team1Score").innerText = data.score1
+document.getElementById("team2Score").innerText = data.score2
+
+}
+
+/* пример обновления (эмуляция API) */
+
+setTimeout(()=>{
+
+updateScore({
+team1:"Team Falcons",
+team2:"NRG Esports",
+score1:1,
+score2:0
+})
+
+},2000)
 
 </script>
 
