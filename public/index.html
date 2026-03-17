@@ -2,106 +2,439 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Betting App</title>
+<title>Esports Betting UI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #0f0f1a;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-  }
 
-  .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 15px;
-  }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Inter;
+}
 
-  .match-card {
-    background: #1a1a2e;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-  }
+body{
+background:#0b0f1a;
+color:white;
+}
 
-  .teams {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+/* HEADER */
 
-  .team {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 18px;
-  }
+header{
+height:70px;
+background:#111728;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 30px;
+border-bottom:1px solid #1c2438;
+}
 
-  .team-logo {
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    background: #444;
-  }
+.logo{
+font-size:28px;
+font-weight:700;
+letter-spacing:2px;
+}
 
-  .odds {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-  }
+.wallet{
+background:#1b2438;
+padding:8px 16px;
+border-radius:8px;
+font-size:14px;
+}
 
-  .odds div {
-    background: #22223b;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+/* SPORTS BAR */
 
-  .odds div:hover {
-    background: #ff5500;
-    color: #fff;
-  }
+.sports{
+display:flex;
+gap:25px;
+padding:12px 30px;
+border-bottom:1px solid #1c2438;
+background:#0f1423;
+opacity:.9;
+}
 
-  .header {
-    text-align: center;
-    font-size: 16px;
-    color: #aaa;
-    margin-bottom: 15px;
-  }
+.sports span{
+opacity:.6;
+cursor:pointer;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+height:calc(100vh - 110px);
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+padding:25px;
+overflow:auto;
+}
+
+/* MATCH */
+
+.match-card{
+background:#12192c;
+border-radius:12px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.match-title{
+font-size:18px;
+margin-bottom:15px;
+opacity:.8;
+}
+
+.team-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid #1c2438;
+}
+
+.team-row:last-child{
+border:none;
+}
+
+.team{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.odds{
+background:#1b2438;
+padding:6px 16px;
+border-radius:6px;
+cursor:pointer;
+transition:.2s;
+}
+
+.odds:hover{
+background:#3fa7ff;
+}
+
+/* TABS */
+
+.tabs{
+display:flex;
+gap:15px;
+margin:20px 0;
+}
+
+.tab{
+background:#1b2438;
+padding:8px 14px;
+border-radius:6px;
+font-size:14px;
+cursor:pointer;
+}
+
+/* EXPERT TIPS */
+
+.tips{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.tip{
+background:#12192c;
+padding:16px;
+border-radius:10px;
+font-size:13px;
+opacity:.9;
+}
+
+/* MARKETS */
+
+.market{
+background:#12192c;
+border-radius:12px;
+padding:20px;
+}
+
+.market-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 0;
+border-bottom:1px solid #1c2438;
+}
+
+.market-row:last-child{
+border:none;
+}
+
+.market-buttons{
+display:flex;
+gap:10px;
+}
+
+.market-buttons button{
+background:#1b2438;
+border:none;
+color:white;
+padding:6px 14px;
+border-radius:6px;
+cursor:pointer;
+transition:.2s;
+}
+
+.market-buttons button:hover{
+background:#3fa7ff;
+}
+
+/* BETSLIP */
+
+.betslip{
+width:330px;
+background:#111728;
+border-left:1px solid #1c2438;
+padding:20px;
+display:flex;
+flex-direction:column;
+}
+
+.betslip-title{
+font-size:16px;
+margin-bottom:15px;
+}
+
+.bet{
+background:#1b2438;
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+font-size:14px;
+}
+
+input{
+background:#0b0f1a;
+border:1px solid #1c2438;
+padding:10px;
+color:white;
+border-radius:6px;
+margin-top:10px;
+}
+
+button.place{
+margin-top:15px;
+padding:12px;
+border:none;
+background:#3fa7ff;
+color:white;
+font-weight:600;
+border-radius:8px;
+cursor:pointer;
+}
+
+.win{
+margin-top:10px;
+font-size:14px;
+opacity:.8;
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="container">
-  <div class="match-card">
-    <div class="header">Counter-Strike 2 • BLAST Open Spring 2026 • Завтра, 12:00</div>
+<header>
 
-    <div class="teams">
-      <div class="team">
-        <div class="team-logo" style="background:#4ade80"></div>
-        Team Falcons
-      </div>
-      <div class="team">VS</div>
-      <div class="team">
-        <div class="team-logo" style="background:#f87171"></div>
-        NRG Esports
-      </div>
-    </div>
+<div class="logo">RAZED</div>
 
-    <div class="odds">
-      <div>Team Falcons: 1.22</div>
-      <div>NRG Esports: 3.85</div>
-      <div>Фора Team Falcons (-4.5): 1.81</div>
-      <div>Тотал больше 20.5: 1.83</div>
-    </div>
-  </div>
+<div class="wallet">
+$0.00 Кошелек
 </div>
+
+</header>
+
+<div class="sports">
+
+<span>⚽</span>
+<span>🏀</span>
+<span>🎮 CS2</span>
+<span>🎾</span>
+<span>🏈</span>
+<span>🏐</span>
+
+</div>
+
+<div class="container">
+
+<div class="main">
+
+<div class="match-card">
+
+<div class="match-title">
+Counter-Strike 2 • BLAST Open Spring 2026
+</div>
+
+<div class="team-row">
+
+<div class="team">Team Falcons</div>
+
+<div class="odds" onclick="addBet('Team Falcons',1.22)">
+1.22
+</div>
+
+</div>
+
+<div class="team-row">
+
+<div class="team">NRG Esports</div>
+
+<div class="odds" onclick="addBet('NRG Esports',3.85)">
+3.85
+</div>
+
+</div>
+
+</div>
+
+<div class="tips">
+
+<div class="tip">
+В последних BO3 Falcons выиграли 2-1 против NRG
+</div>
+
+<div class="tip">
+Falcons вели 11-1 на первой карте
+</div>
+
+<div class="tip">
+Последний матч закончился 13-5
+</div>
+
+</div>
+
+<div class="tabs">
+
+<div class="tab">Основные</div>
+<div class="tab">Карта 1</div>
+<div class="tab">Карта 2</div>
+<div class="tab">Игроки</div>
+
+</div>
+
+<div class="market">
+
+<div class="market-row">
+
+<div>Победитель</div>
+
+<div class="market-buttons">
+
+<button onclick="addBet('Falcons',1.22)">
+1.22
+</button>
+
+<button onclick="addBet('NRG',3.85)">
+3.85
+</button>
+
+</div>
+
+</div>
+
+<div class="market-row">
+
+<div>Тотал раундов</div>
+
+<div class="market-buttons">
+
+<button onclick="addBet('Over',1.83)">
+Больше 20.5
+</button>
+
+<button onclick="addBet('Under',1.90)">
+Меньше 20.5
+</button>
+
+</div>
+
+</div>
+
+<div class="market-row">
+
+<div>Фора</div>
+
+<div class="market-buttons">
+
+<button onclick="addBet('Falcons -4.5',1.81)">
+-4.5
+</button>
+
+<button onclick="addBet('NRG +4.5',1.95)">
++4.5
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="betslip">
+
+<div class="betslip-title">
+Купон
+</div>
+
+<div id="bets"></div>
+
+<input id="stake" placeholder="Сумма ставки">
+
+<div class="win" id="win">
+Возможный выигрыш: $0
+</div>
+
+<button class="place">
+Поставить
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let odds = 0
+
+function addBet(name,value){
+
+odds = value
+
+document.getElementById("bets").innerHTML = 
+`<div class="bet">
+${name}<br>
+коэффициент ${value}
+</div>`
+
+}
+
+document.getElementById("stake").addEventListener("input",function(){
+
+let stake = this.value
+let win = stake * odds
+
+document.getElementById("win").innerText =
+"Возможный выигрыш: $" + win.toFixed(2)
+
+})
+
+</script>
 
 </body>
 </html>
